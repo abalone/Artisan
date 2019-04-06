@@ -1,0 +1,103 @@
+<html>
+
+<head>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js'></script>
+</head>
+
+<body>
+    <div id="M1ed4bf21871b4029b7672b1cfd81aa6b-cont">
+        <div id="M1ed4bf21871b4029b7672b1cfd81aa6b" style="width:100%;height:100%;"></div>
+    </div>
+    <script>
+        require.config({
+            paths: {
+                'cytoscape': 'https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.5.2/cytoscape.min',
+            },
+            shim: {
+                'cytoscape': { 'exports': 'cytoscape' },
+            },
+        });
+
+        require(['cytoscape'], function (cytoscape) {
+            var cy = cytoscape({
+                container: document.getElementById('M1ed4bf21871b4029b7672b1cfd81aa6b'),
+                elements: {
+                    nodes: [
+                        { data: { id: 'a', name: 'Node A', type: 'big' } },
+                        { data: { id: 'b', name: 'Node B', type: 'little' } },
+                        { data: { id: 'c', name: 'Node C', type: 'middle'}},
+                        { group: 'nodes', data: { id: 'c1', name: 'Node C1', type: 'little', parent: 'c'}},
+                        { group: 'nodes', data: { id: 'c2', name: 'Node C2', type: 'middle', parent: 'c'}},
+                        { group: 'nodes', data: { id: 'c3', name: 'Node C3', type: 'middle', parent: 'c'}},
+                        { group: 'nodes', data: { id: 'c4', name: 'Node C4', type: 'middle', parent: 'c'}},
+                        { group: 'nodes', data: { id: 'c5', name: 'Node C5', type: 'middle', parent: 'c'}},
+                        { group: 'nodes', data: { id: 'c6', name: 'Node C6', type: 'middle', parent: 'c'}},
+                    ],
+                    edges: [
+                        { data: { source: 'a', target: 'b' } },
+                        { data: { source: 'b', target: 'a' } },
+                        { data: { source: 'a', target: 'c' } },
+                        { data: { source: 'c', target: 'b' } },
+                    ]
+                },
+
+                style: [
+                    {
+                        selector: 'node',
+                        style: {
+                            'text-valign': 'center',
+                            'text-halign': 'center',
+                            'border-color': 'red',
+                            'background-color': 'white',
+                            'border-width': 1,
+                            'label': 'data(name)',
+                            'height': 100,  // defaults
+                            'width': 100
+                        }
+                    },
+                    {
+                        selector: "node[type='big']",
+                        style: {
+                            'height': 150,
+                            'width': 150,
+                            'shape': 'roundrectangle'
+                        }
+                    },
+                    {
+                        selector: "node[type='little']",
+                        style: {
+                            'height': 80,
+                            'width': 80,
+                        }
+                    },
+                    {
+                        selector: "node[type='middle']",
+                        style: {
+                            'height': 80,
+                            'width': 80,
+                            'shape': 'triangle'
+                        }
+                    },
+                    {
+                        selector: 'edge',
+                        style: {
+                            'width': '1px',
+                            'line-color': 'blue',
+                            'target-arrow-shape': 'triangle',
+                            'target-arrow-color': 'black',
+                            'curve-style': 'bezier'
+                        }
+                    }
+                ],
+
+                ready: function () {
+                    console.log("small cyjs network ready");
+                } // ready
+            }); // cytoscape
+        });
+
+    </script>
+</body>
+
+
+</html>
